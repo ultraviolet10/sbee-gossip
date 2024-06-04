@@ -16,16 +16,16 @@ const Header: React.FC<HeaderProps> = () => {
       {/* navigation button system */}
       <div className="flex flex-row items-center justify-center space-x-10">
         <button className="hover:underline hover:underline-offset-2">
-          <span className="font-comic font-bold font-white text-[20px]">
+          <span className="font-comic font-bold text-black text-[20px]">
             SBEE Ecosystem
           </span>
         </button>
         <button className="hover:underline hover:underline-offset-2">
-          <span className="font-comic font-bold font-white text-[20px]">About Us</span>
+          <span className="font-comic font-bold text-black text-[20px]">About Us</span>
         </button>
         <button className="hover:underline hover:underline-offset-2">
           {/* if no wallet connected, take them to the connect wallet page */}
-          <span className="font-comic font-bold font-white text-[20px]">
+          <span className="font-comic font-bold text-black text-[20px]">
             Post Anonymous Tips
           </span>
         </button>
