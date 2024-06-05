@@ -2,9 +2,14 @@ import Footer from "@/components/landing/Footer"
 import Header from "@/components/landing/Header"
 import { NextPage } from "next"
 import Image from "next/image"
-import React from "react"
+import React, { useCallback } from "react"
+import { configMetamask } from "../../utils/provider"
 
 const ConnectPage: NextPage = () => {
+  const handleConnectWallet = useCallback(async () => {
+    const { provider, signer } = await configMetamask()
+    console.log({ provider, signer })
+  }, [])
   return (
     <div className="flex flex-col w-full items h-screen px-6 bg-sbee">
       <Header />
@@ -20,7 +25,10 @@ const ConnectPage: NextPage = () => {
         </span>
 
         <button className=""></button>
-        <button className="bg-[#ffc70f] w-[200px] h-12 border-[#f59f00] border-[2px] font-comic text-[20px] font-bold rounded-xl">
+        <button
+          className="bg-[#ffc70f] w-[200px] h-12 border-[#f59f00] border-[2px] font-comic text-[20px] font-bold rounded-xl"
+          onClick={handleConnectWallet}
+        >
           Connect Wallet
         </button>
       </div>
