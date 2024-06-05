@@ -3,12 +3,29 @@ import Header from "@/components/landing/Header"
 import { NextPage } from "next"
 import Image from "next/image"
 import React, { useCallback } from "react"
-import { configMetamask } from "../../utils/provider"
+import { useConfigWallet } from "../hooks/useConfigWallet"
+import { Identity } from "@semaphore-protocol/core"
+// import { toast } from "sonner"
 
 const ConnectPage: NextPage = () => {
-  const handleConnectWallet = useCallback(async () => {
-    const { provider, signer } = await configMetamask()
-    console.log({ provider, signer })
+  const { connectWallet, signMessage } = useConfigWallet()
+
+  const handleConnectClick = useCallback(async () => {
+    // connect wallet
+    const connection = await connectWallet()
+
+    // sign message
+    let msgSignature: string | undefined = undefined
+    if (connection) {
+      console.log("")
+      msgSignature = await signMessage("truths galore")
+    } else {
+      console.log("sign issue")
+    }
+
+    if(msgSignature) {
+      const identity = new Identity(msgSignature)
+    }
   }, [])
   return (
     <div className="flex flex-col w-full items h-screen px-6 bg-sbee">
@@ -21,13 +38,13 @@ const ConnectPage: NextPage = () => {
           alt={"honeypot"}
         ></Image>
         <span className="text-[#60330a] text-[20px] font-comic font-bold">
-          Connect wallet & post honest truth
+          Connect wallet & post honest truths
         </span>
 
         <button className=""></button>
         <button
           className="bg-[#ffc70f] w-[200px] h-12 border-[#f59f00] border-[2px] font-comic text-[20px] font-bold rounded-xl"
-          onClick={handleConnectWallet}
+          onClick={handleConnectClick}
         >
           Connect Wallet
         </button>

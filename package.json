@@ -12,10 +12,15 @@
     "@metamask/detect-provider": "^2.0.0",
     "@semaphore-protocol/core": "4.0.0-beta.12",
     "@semaphore-protocol/data": "4.0.0-beta.12",
+    "clsx": "^2.1.1",
     "ethers": "^6.13.0",
     "next": "13.5.6",
+    "next-themes": "^0.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sonner": "^1.4.41",
+    "tailwind-merge": "^2.3.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
