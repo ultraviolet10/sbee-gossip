@@ -55,6 +55,6 @@ export const useConfigWallet = () => {
 
   return {
     connectWallet,
-    signMessage
+    signMessage,
   }
 }
