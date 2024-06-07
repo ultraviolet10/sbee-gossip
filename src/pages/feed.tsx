@@ -10,7 +10,7 @@ const FeedPage: NextPage = () => {
     <Header />
 
     <div className="flex flex-col w-full h-full items-center justify-center">
-      <span className="text-black font-comic text-[40px] font-bold">Truth Or Lie?</span>
+      <span className="text-black font-comic text-[40px] font-bold mb-4">Truth Or Lie?</span>
       <FeedLayout />
     </div>
 
