@@ -1,18 +1,14 @@
-import Image from "next/image"
 import React from "react"
+import Image from "next/image"
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="flex flex-row items-center justify-between w-full h-[150px] px-6">
-      {/* <Image
-        src={"/img/landing-banner.svg"}
-        alt={"landing"}
-        className="absolute bottom-0 right-0"
-        fill={true}
-      /> */}
-
+    <footer
+      className="flex flex-row items-center justify-between w-full h-[100px] px-6"
+      // style={{ backgroundImage: 'url(/img/honey-wave.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
       <span className="text-black text-[15px] font-comic font-bold">
         © 2024 SharkBee Coin. All Rights Reserved.
       </span>
@@ -22,19 +18,19 @@ const Footer: React.FC<FooterProps> = () => {
           alt={"discord"}
           width={25}
           height={25}
-        ></Image>
+        />
         <Image
           src={"/img/x-icn.svg"}
-          alt={"discord"}
+          alt={"x"}
           width={25}
           height={25}
-        ></Image>
+        />
         <Image
           src={"/img/telegram-icn.svg"}
-          alt={"discord"}
+          alt={"telegram"}
           width={25}
           height={25}
-        ></Image>
+        />
       </div>
     </footer>
   )

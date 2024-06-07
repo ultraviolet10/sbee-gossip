@@ -1,5 +1,5 @@
-import Image from "next/image"
 import React from "react"
+import Image from "next/image"
 
 interface CopyProps {}
 
@@ -64,7 +64,7 @@ const CopyLayout: React.FC<CopyProps> = () => {
             community. Share your insights and let the Farcaster network decide:
             is it truth or lies?
           </span>
-          <span className="text-black font-comic font-bold text-left text-[15px]">
+          <span className="text-black font-comic font-bold text-left text-[18px]">
             #SBEEtheChange
           </span>
         </div>

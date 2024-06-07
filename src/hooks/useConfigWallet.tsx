@@ -1,10 +1,12 @@
-import { ethers } from "ethers"
-import detectEthereumProvider from "@metamask/detect-provider"
-import useStore from "@/store/store"
 import { useCallback } from "react"
+import { ethers } from "ethers"
+
+import detectEthereumProvider from "@metamask/detect-provider"
+
+import useStore from "@/store/store"
 
 export const useConfigWallet = () => {
-  const { setWalletAddress, setProvider, provider } = useStore()
+  const { setWalletAddress, setProvider } = useStore()
 
   const connectWallet = useCallback(async () => {
     let signer = null
@@ -38,11 +40,10 @@ export const useConfigWallet = () => {
     }
 
     return false
-  }, [])
+  }, [setProvider, setWalletAddress])
 
   const signMessage = useCallback(async (message: string): Promise<string> => {
     const metamaskProvider = await detectEthereumProvider()
-    console.log("sign")
     let signature = ""
     if (metamaskProvider && window.ethereum) {
       const provider = new ethers.BrowserProvider(window.ethereum)

@@ -1,13 +1,14 @@
 {
-  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "plugins": ["@typescript-eslint", "simple-import-sort", "unused-imports"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
     "@next/next/no-img-element": "off",
     "sort-imports": "off",
     "import/first": "error",
@@ -21,8 +22,8 @@
           [
             "^react",
             "^next",
-            "@metamask|@walletconnect|clsx|@reduxjs|async-mutex|flowbite-react|redux-persist|pubnub|redux",
-            "^(ethers|google|lodash|bn.js|styled-components|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)"
+            "@heroicons|clsx|tailwind-merge|chart.js|highcharts|@emotion|@nextui-org/react|numeral|viem|eth-rpc-errors|web3|ethers",
+            "^(lodash|@headlessui/react|zustand|cookies|formik|axios|yup|lottie-web|mixpanel-browser|@react-oauth/google|typewriter-effect|crypto-js|@stripe/stripe-j|url-regex|tailwind-variants|rc-upload|framer-motion|@tanstack/react-query|wagmi|@rainbow-me/rainbowkit|bignumber.js)"
           ],
           // Internal packages.
           ["^@?\\w"],
@@ -35,6 +36,17 @@
           // Side effect imports.
           ["^\\u0000"]
         ]
+      }
+    ],
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
       }
     ]
   }

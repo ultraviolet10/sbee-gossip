@@ -1,14 +1,21 @@
-import Footer from "@/components/landing/Footer"
-import Header from "@/components/landing/Header"
+import React, { useCallback, useEffect } from "react"
 import { NextPage } from "next"
 import Image from "next/image"
-import React, { useCallback } from "react"
+import { useRouter } from "next/router"
+
+import { Identity } from "@semaphore-protocol/core/identity"
+
 import { useConfigWallet } from "../hooks/useConfigWallet"
-import { Identity } from "@semaphore-protocol/core"
-// import { toast } from "sonner"
+
+import Footer from "@/components/layout/Footer"
+import Header from "@/components/layout/Header"
+import useStore from "@/store/store"
 
 const ConnectPage: NextPage = () => {
+  const router = useRouter()
+
   const { connectWallet, signMessage } = useConfigWallet()
+  const { setSemaphoreIdentity, walletAddress } = useStore()
 
   const handleConnectClick = useCallback(async () => {
     // connect wallet
@@ -17,16 +24,25 @@ const ConnectPage: NextPage = () => {
     // sign message
     let msgSignature: string | undefined = undefined
     if (connection) {
-      console.log("")
       msgSignature = await signMessage("truths galore")
     } else {
+      // handle error
       console.log("sign issue")
     }
 
     if(msgSignature) {
       const identity = new Identity(msgSignature)
+      setSemaphoreIdentity(identity.commitment)
+      router.push("/feed")
     }
-  }, [])
+  }, [connectWallet, router, setSemaphoreIdentity, signMessage])
+
+  useEffect(() => {
+    // if user is already connected, send them over to the gossip feed page
+    if(walletAddress) {
+      router.push("/feed")
+    }
+  }, [router, walletAddress])
   return (
     <div className="flex flex-col w-full items h-screen px-6 bg-sbee">
       <Header />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   createContext,
   ReactNode,
@@ -6,8 +7,9 @@ import React, {
   useEffect,
   useState,
 } from "react"
-import { SemaphoreEthers } from "@semaphore-protocol/data"
 import { decodeBytes32String, toBeHex } from "ethers"
+
+import { SemaphoreEthers } from "@semaphore-protocol/data"
 
 export type SemaphoreContextType = {
   _users: string[]

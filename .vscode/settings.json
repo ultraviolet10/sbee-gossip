@@ -5,8 +5,12 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {},
-  "inline-bookmarks.view.showVisibleFilesOnly": true,
-  "svg.preview.background": "editor",
-  "editor.cursorBlinking": "smooth",
-  "editor.cursorSmoothCaretAnimation": "on"
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
