@@ -10,6 +10,7 @@ import { useConfigWallet } from "../hooks/useConfigWallet"
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
 import useStore from "@/store/store"
+import { Routes } from "@/types/enums"
 
 const ConnectPage: NextPage = () => {
   const router = useRouter()
@@ -33,14 +34,14 @@ const ConnectPage: NextPage = () => {
     if(msgSignature) {
       const identity = new Identity(msgSignature)
       setSemaphoreIdentity(identity.commitment)
-      router.push("/feed")
+      router.push(Routes.Feed)
     }
   }, [connectWallet, router, setSemaphoreIdentity, signMessage])
 
   useEffect(() => {
     // if user is already connected, send them over to the gossip feed page
     if(walletAddress) {
-      router.push("/feed")
+      router.push(Routes.Feed)
     }
   }, [router, walletAddress])
   return (

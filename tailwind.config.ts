@@ -23,6 +23,9 @@ const config: Config = {
     fontFamily: {
       comic: ['"Comic Neue"', "cursive"],
     },
+    boxShadow: {
+      "connect": "0 4px 6px 0 #603309"
+    }
   },
   plugins: [],
 }

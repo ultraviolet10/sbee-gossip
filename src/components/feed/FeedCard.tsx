@@ -20,7 +20,7 @@ const FeedCard: React.FC<FeedCardProps> = () => {
           <button className='flex flex-row items-center justify-between w-[50%] h-[50px] bg-[#97c236] rounded-xl px-3 font-bold text-[20px]'>I kinda believe it</button>
           <button className='flex flex-row items-center justify-between w-[50%] h-[50px] bg-[#c24836] rounded-xl px-3 font-bold text-[20px]'>This is BS</button>
         </div>
-        {/* percentage */}
+        {/* percentage stat */}
         <span className='text-black text-[20px]'>true!!</span>
       </div>
     </div>
