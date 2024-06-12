@@ -45,8 +45,8 @@ const ConnectPage: NextPage = () => {
   }, [router, walletAddress]);
 
   return (
-    <div className="flex flex-col w-full h-full min-h-screen bg-sbee">
-      {/* <Header />  */}
+    <div className="flex flex-col px-4 w-full h-full min-h-screen bg-sbee">
+      <Header /> 
       <div className="flex flex-col flex-grow items-center justify-center space-y-4 p-4">
         <Image
           src={"/img/honeypot.svg"}
