@@ -6,7 +6,7 @@ interface CopyProps {}
 const CopyLayout: React.FC<CopyProps> = () => {
   return (
     <div className="flex flex-col items-center justify-center space-y-4 px-6">
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col space-y-4 md:flex-row items-center justify-between">
         <div className="flex flex-col items-start justify-center space-y-6">
           <span className="text-black font-bold font-comic text-[25px]">
             LetSBeeHonest
@@ -34,14 +34,15 @@ const CopyLayout: React.FC<CopyProps> = () => {
         />
       </div>
 
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col-reverse space-y-4 w-full md:flex-row md:items-center justify-between">
         <Image
           src={"/img/new-post.svg"}
           alt={"phone"}
           width={450}
           height={450}
+          className="mt-4"
         />
-        <div className="flex flex-col items-start justify-center space-y-6 w-[50%]">
+        <div className="flex flex-col items-start justify-center mt-4 space-y-6 md:w-[50%]">
           <span className="text-black font-bold font-comic text-[25px]">
             LetSBeeHonest
           </span>
@@ -54,8 +55,8 @@ const CopyLayout: React.FC<CopyProps> = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-col items-start justify-center space-y-6 w-[50%]">
+      <div className="flex flex-col space-y-4 md:flex-row items-center justify-between">
+        <div className="flex flex-col items-start justify-center space-y-6 md:w-[50%]">
           <span className="text-black font-bold font-comic text-[25px]">
             LetSBeeHonest
           </span>
