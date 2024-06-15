@@ -13,11 +13,11 @@ import { SemaphoreEthers } from "@semaphore-protocol/data"
 
 export type SemaphoreContextType = {
   _users: string[]
-  _feedback: string[]
+  _gossip: string[]
   refreshUsers: () => Promise<void>
   addUser: (user: string) => void
-  refreshFeedback: () => Promise<void>
-  addFeedback: (feedback: string) => void
+  refreshGossip: () => Promise<void>
+  addGossip: (gossip: string) => void
 }
 
 const SemaphoreContext = createContext<SemaphoreContextType | null>(null)
@@ -34,8 +34,8 @@ const ethereumNetwork =
 export const SemaphoreContextProvider: React.FC<ProviderProps> = ({
   children,
 }) => {
-  const [_users, setUsers] = useState<any[]>([])
-  const [_feedback, setFeedback] = useState<string[]>([])
+  const [_users, setUsers] = useState<string[]>([])
+  const [_gossip, setGossip] = useState<string[]>([])
 
   const refreshUsers = useCallback(async (): Promise<void> => {
     const semaphore = new SemaphoreEthers(ethereumNetwork, {
@@ -56,7 +56,7 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({
     [_users]
   )
 
-  const refreshFeedback = useCallback(async (): Promise<void> => {
+  const refreshGossip = useCallback(async (): Promise<void> => {
     const semaphore = new SemaphoreEthers(ethereumNetwork, {
       address: process.env.NEXT_PUBLIC_SEMAPHORE_CONTRACT_ADDRESS,
     })
@@ -65,34 +65,34 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({
       process.env.NEXT_PUBLIC_GROUP_ID as string
     )
 
-    setFeedback(
+    setGossip(
       proofs.map(({ message }: any) =>
         decodeBytes32String(toBeHex(message, 32))
       )
     )
   }, [])
 
-  const addFeedback = useCallback(
-    (feedback: string) => {
-      setFeedback([..._feedback, feedback])
+  const addGossip = useCallback(
+    (gossip: string) => {
+      setGossip([..._gossip, gossip])
     },
-    [_feedback]
+    [_gossip]
   )
 
   useEffect(() => {
     refreshUsers()
-    refreshFeedback()
-  }, [refreshFeedback, refreshUsers])
+    refreshGossip()
+  }, [refreshGossip, refreshUsers])
 
   return (
     <SemaphoreContext.Provider
       value={{
         _users,
-        _feedback,
+        _gossip,
         refreshUsers,
         addUser,
-        refreshFeedback,
-        addFeedback,
+        refreshGossip,
+        addGossip,
       }}
     >
       {children}

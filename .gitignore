@@ -1,38 +1,36 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Environment variables
+*.env
+.vscode
+.vs
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# MacOS
 .DS_Store
-*.pem
 
-# debug
+# Node
+node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# local env files
-.env*.local
+# Contract outputs
+packages/contracts/cache/
+packages/contracts/out/
+packages/contracts/broadcast/
+packages/webapp/src/generated.ts
 
-# vercel
-.vercel
+# IntelliJ config
+.idea/
+*.iml
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Webapp outputs
+packages/webapp/.next
+packages/webapp/next-env.d.ts
+packages/webapp/tsconfig.tsbuildinfo
 
-# environment 
-.env
+# Circuits outputs
+packages/circuits/build
+packages/circuits/out
+packages/circuits/trusted_setup
+packages/circuits/zkeys
+packages/webapp/public/proofs

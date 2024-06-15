@@ -1,5 +1,7 @@
 import { Head, Html, Main, NextScript } from "next/document"
 
+import { Toaster } from "@/components/ui/Toaster"
+
 export default function Document() {
   return (
     <Html lang="en">
@@ -17,6 +19,7 @@ export default function Document() {
       </Head>
       <body>
         <Main />
+        <Toaster expand={true} position={"bottom-center"} />
         <NextScript />
       </body>
     </Html>
