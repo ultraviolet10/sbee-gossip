@@ -39,14 +39,14 @@ anvil:
 .PHONY: anvil
 
 deploy: build
-	@forge script src/deploy/Deploy.s.sol:Deploy \
+	@forge script script/Gossip.s.sol:GossipScript \
 		--fork-url $(RPC_$(CONFIG)) \
 		--private-key $(PRIVATE_KEY_$(CONFIG)) \
 		--broadcast \
 		--non-interactive \
 		| grep "address " > out/deployment.txt
 	@cat out/deployment.txt
-	@node scripts/extract_contract_addresses_abis.js \
+	@node helper/extract_contract_addresses_abis.js \
 		out/deployment.txt \
 		out/abis.json \
 		> out/deployment.json

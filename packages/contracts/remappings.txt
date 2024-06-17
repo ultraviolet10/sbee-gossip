@@ -1,5 +1,6 @@
 ds-test/=lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
 @semaphore-protocol/=lib/semaphore/packages/contracts/
-@zk-kit/incremental-merkle-tree.sol/=lib/zk-kit/packages/incremental-merkle-tree.sol/contracts/
+@zk-kit/lean-imt.sol/=lib/zk-kit.solidity/packages/lean-imt/contracts/
 @openzeppelin/=lib/openzeppelin-contracts/
+poseidon-solidity/=lib/poseidon-solidity/contracts/

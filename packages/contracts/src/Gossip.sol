@@ -1,9 +1,9 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import "@semaphore-protocol/contracts/interfaces/ISemaphore.sol";
+import {ISemaphore} from "@semaphore-protocol/contracts/interfaces/ISemaphore.sol";
 
-contract Gossip2 {
+contract Gossip {
     ISemaphore public semaphore;
 
     uint256 public groupId;
