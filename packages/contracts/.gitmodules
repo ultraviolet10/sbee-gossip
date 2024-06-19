@@ -10,3 +10,6 @@
 [submodule "packages/contracts/lib/poseidon-solidity"]
 	path = packages/contracts/lib/poseidon-solidity
 	url = https://github.com/vimwitch/poseidon-solidity
+[submodule "packages/contracts/lib/openzeppelin-contracts"]
+	path = packages/contracts/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
