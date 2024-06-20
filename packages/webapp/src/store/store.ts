@@ -1,5 +1,7 @@
-import { BrowserProvider } from "ethers"
+import { BrowserProvider, JsonRpcProvider } from "ethers"
 import { create } from "zustand"
+
+import { Identity } from "@semaphore-protocol/core"
 
 import { StoreState } from "./type"
 
@@ -10,9 +12,9 @@ const useStore = create<StoreState>((set) => ({
 
   setWalletAddress: (address: string) =>
     set(() => ({ walletAddress: address })),
-  setProvider: (provider: BrowserProvider) => set(() => ({ provider })),
-  setSemaphoreIdentity: (id: bigint) =>
-    set(() => ({ semaphoreIdentity: id })),
+  setProvider: (provider: BrowserProvider | JsonRpcProvider) => set(() => ({ provider })),
+  setSemaphoreIdentity: (iden: Identity) =>
+    set(() => ({ semaphoreIdentity: iden })),
 }))
 
 export default useStore

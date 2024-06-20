@@ -53,6 +53,8 @@ export const useConfigWallet = () => {
 
       setWalletAddress(signer.address)
       setProvider(provider)
+
+      return true
     }
     
 

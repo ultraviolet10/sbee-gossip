@@ -32,7 +32,7 @@ const ConnectPage: NextPage = () => {
 
     if (msgSignature) {
       const identity = new Identity(msgSignature);
-      setSemaphoreIdentity(identity.commitment);
+      setSemaphoreIdentity(identity);
       router.push(Routes.Feed);
     }
   }, [connectWallet, router, setSemaphoreIdentity, signMessage]);
