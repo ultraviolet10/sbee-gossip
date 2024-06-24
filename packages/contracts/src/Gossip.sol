@@ -10,7 +10,6 @@ contract Gossip {
 
     constructor(address semaphoreAddress) {
         semaphore = ISemaphore(semaphoreAddress);
-
         groupId = semaphore.createGroup();
     }
 
