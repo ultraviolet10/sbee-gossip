@@ -70,21 +70,20 @@ contract GossipTest is Test {
     }
 
     function test_GroupCreation() external {
-        assertEq(semaphore.groupCounter(), 0);
+        assertEq(semaphore.groupCounter(), 1);
         assertEq(gossip.groupId(), 0);
 
         // events emitted on new group creation, group counter goes up to 2
         // first group that is created is with ID 0
         vm.expectEmit(true, false, false, false);
-        emit GroupCreated(0);
+        emit GroupCreated(1);
         vm.expectEmit(true, true, true, false);
-        emit GroupAdminUpdated(0, address(0), address(this));
+        emit GroupAdminUpdated(1, address(0), address(this));
 
         // create new group
-        vm.startPrank(address(gossip));
         semaphore.createGroup();
 
         // groupCounter is post incremented to 1 for next group creation
-        assertEq(semaphore.groupCounter(), 1);
+        assertEq(semaphore.groupCounter(), 2);
     }
 }
