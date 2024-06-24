@@ -1,5 +1,5 @@
 export enum Routes {
-  Home = "/",
-  Connect = "/connect",
-  Feed = "/feed"
+    Home = "/",
+    Connect = "/connect",
+    Feed = "/feed",
 }

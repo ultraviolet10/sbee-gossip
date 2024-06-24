@@ -7,9 +7,7 @@ export default defineConfig({
         react(),
         foundry({
             project: "../contracts",
-            include: [
-                "Gossip.sol/**/*.json",
-            ],
+            include: ["Gossip.sol/**/*.json"],
         }),
     ],
 })
