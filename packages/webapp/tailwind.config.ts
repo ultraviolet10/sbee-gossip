@@ -24,6 +24,7 @@ const config: Config = {
         },
         boxShadow: {
             connect: "0 4px 6px 0 #603309",
+            post: "0 4px 6px 0 #F59F00",
         },
     },
     plugins: [],
