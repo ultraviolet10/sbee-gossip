@@ -10,8 +10,6 @@ import {ISemaphoreVerifier} from "@semaphore-protocol/contracts/interfaces/ISema
 
 import {PoseidonT3} from "poseidon-solidity/PoseidonT3.sol";
 
-// import {FoundryRandom} from "foundry-random/FoundryRandom.sol";
-
 contract GossipTest is Test {
     SemaphoreVerifier public verifier;
     Semaphore public semaphore;
@@ -57,13 +55,13 @@ contract GossipTest is Test {
         gossip.joinGroup(users[0]);
 
         // adding 2nd user updates the merkle tree root using poseidonT3
-        uint newRootHash = PoseidonT3.hash([users[0], users[1]]); // why doesn't this compute within the event itself? (makes sense-ish not to but curious nonetheless)
+        uint newRootHash = PoseidonT3.hash([users[0], users[1]]);
         vm.expectEmit(true, true, true, true);
         emit MemberAdded(0, 1, users[1], newRootHash);
         gossip.joinGroup(users[1]);
 
         // 3rd user
-        uint newerRootHash = PoseidonT3.hash([newRootHash, users[2]]); // why doesn't this compute within the event itself? (makes sense-ish not to but curious nonetheless)
+        uint newerRootHash = PoseidonT3.hash([newRootHash, users[2]]);
         vm.expectEmit(true, true, true, true);
         emit MemberAdded(0, 2, users[2], newerRootHash);
         gossip.joinGroup(users[2]);

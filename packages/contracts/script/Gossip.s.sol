@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Script, console2} from "forge-std/Script.sol";
+import {Script, console, console2} from "forge-std/Script.sol";
 import {Semaphore} from "@semaphore-protocol/contracts/Semaphore.sol";
 import {SemaphoreVerifier} from "@semaphore-protocol/contracts/base/SemaphoreVerifier.sol";
 import {ISemaphoreVerifier} from "@semaphore-protocol/contracts/interfaces/ISemaphoreVerifier.sol";
@@ -34,18 +34,15 @@ contract GossipScript is Script {
         gossip = new Gossip(address(semaphore));
 
         // Create a Semaphore group with the deployer as the admin
-        semaphore.createGroup();
-
+        uint256 currGroupId = semaphore.groupCounter();
+        console2.logUint(currGroupId); // solhint-disable-line
         /*
             - add first 5 wallets as users to semaphore group
             - identity commitments should be pvt key + message signature hash
          */
 
         // Corresponding private keys (for test purposes only, never share private keys in production)
-        uint256[5] memory privateKeys = [
-            uint256(
-                0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-            ),
+        uint256[4] memory privateKeys = [
             uint256(
                 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
             ),
@@ -64,7 +61,7 @@ contract GossipScript is Script {
         bytes32 messageHash = keccak256(abi.encodePacked("truths galore"));
 
         // Generate signature hashes and add users to Semaphore group
-        for (uint256 i = 0; i < 5; i++) {
+        for (uint256 i = 0; i < 4; i++) {
             (uint8 v, bytes32 r, bytes32 s) = vm.sign(
                 privateKeys[i],
                 messageHash
@@ -75,7 +72,8 @@ contract GossipScript is Script {
             // Convert address to uint256 for identity commitment
             uint256 identityCommitment = uint256(uint160(signer));
 
-            semaphore.addMember(1, identityCommitment);
+            // first group - [0]
+            gossip.joinGroup(identityCommitment);
         }
 
         // log deployed contract addresses
