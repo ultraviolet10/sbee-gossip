@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react"
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
 import { Textarea } from "@/components/ui/Textarea"
+import { useSemaphoreContext } from "@/contexts/SemaphoreContext"
 import useStore from "@/store/store"
 
 interface NewPostModalProps {}
@@ -9,24 +10,37 @@ interface NewPostModalProps {}
 const NewPostModal: React.FC<NewPostModalProps> = () => {
     const [gossipContent, setGossipContent] = useState<string | undefined>(undefined)
     const [open, setOpen] = useState<boolean>(false)
-    const { addGossip } = useStore()
+    const { addGossip, semaphoreIdentity } = useStore()
+
+    const { addUserToGroup, users, submitGossip } = useSemaphoreContext()
 
     const handleGossipInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setGossipContent(event.target.value)
     }
 
     const handleGossipSubmit = useCallback(async () => {
-        // if (_users && _users.length < 2) {
-        //   console.log("No anonymity in a group of one!")
-        //   return
-        // }
+        if (users && users.length < 2) {
+            // users come in pre loaded from the deploy script
+            console.log("No anonymity in a group of one!")
+            return
+        }
+
+        // if identity commitment is not present in the group (onchain), add it first
+        if (users.indexOf(semaphoreIdentity?.commitment.toString() as string) === -1) {
+            await addUserToGroup(semaphoreIdentity!.commitment) // returns t / f
+        }
+
+        // some user addition drama as well
+        // user has typed something out
         if (gossipContent) {
+            await submitGossip(semaphoreIdentity!, gossipContent as string)
+
             addGossip(gossipContent)
             setGossipContent(undefined)
 
             setOpen(false)
         }
-    }, [addGossip, gossipContent])
+    }, [addGossip, addUserToGroup, gossipContent, semaphoreIdentity, submitGossip, users])
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>

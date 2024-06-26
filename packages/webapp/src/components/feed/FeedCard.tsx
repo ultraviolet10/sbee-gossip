@@ -2,6 +2,7 @@ import React from "react"
 
 interface FeedCardProps {
     statement: string
+    // votes: number
 }
 
 const FeedCard: React.FC<FeedCardProps> = ({ statement }) => {
@@ -11,9 +12,7 @@ const FeedCard: React.FC<FeedCardProps> = ({ statement }) => {
                 {/* date of post */}
                 <span className="text-black text-[15px] text-left mb-4">23 August, 08:21 AM. 3min ago.</span>
                 {/* title */}
-                <span className="text-black text-[25px] text-left font-bold mb-4">
-                    heading
-                </span>
+                <span className="text-black text-[25px] text-left font-bold mb-4">heading</span>
                 {/* content */}
                 <span className="text-black text-[20px] text-left mb-4">
                     {statement}{" "}
