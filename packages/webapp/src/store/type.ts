@@ -15,5 +15,5 @@ export interface StoreState {
     addGossip: (gossip: string) => void // function to add gossip statement to the array
     addUser: (user: string) => void // function to add a user to the array
     setUsers: (members: string[]) => void // function to set the array of users
-    setGossip: (proofs: any[]) => void // function to set the array of gossips (data type)
+    setGossip: (proofs: string[]) => void // function to set the array of gossips (data type)
 }
