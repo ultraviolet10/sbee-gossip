@@ -60,6 +60,8 @@ const Header: React.FC<HeaderProps> = () => {
                                 pathname !== Routes.Home,
                             "hover:underline hover:underline-offset-2 hover:decoration-white hover:decoration-3":
                                 pathname === Routes.Home,
+                            "underline underline-offset-2 decoration-[#603309] decoration-3":
+                                pathname === Routes.Feed,
                         })}
                     >
                         <span

@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <>
             <SemaphoreContextProvider>
                 <Component {...pageProps} />
-                <Toaster expand={true} position="bottom-center" />
+                <Toaster expand={true} position="bottom-center" richColors />
             </SemaphoreContextProvider>
         </>
     )

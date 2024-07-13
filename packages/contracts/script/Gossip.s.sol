@@ -35,7 +35,6 @@ contract GossipScript is Script {
 
         // Create a Semaphore group with the deployer as the admin
         uint256 currGroupId = semaphore.groupCounter();
-        console2.logUint(currGroupId); // solhint-disable-line
         /*
             - add first 5 wallets as users to semaphore group
             - identity commitments should be pvt key + message signature hash
@@ -43,18 +42,10 @@ contract GossipScript is Script {
 
         // Corresponding private keys (for test purposes only, never share private keys in production)
         uint256[4] memory privateKeys = [
-            uint256(
-                0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
-            ),
-            uint256(
-                0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a
-            ),
-            uint256(
-                0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6
-            ),
-            uint256(
-                0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a
-            )
+            uint256(0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d),
+            uint256(0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a),
+            uint256(0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6),
+            uint256(0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a)
         ];
 
         // Message to sign
@@ -62,10 +53,7 @@ contract GossipScript is Script {
 
         // Generate signature hashes and add users to Semaphore group
         for (uint256 i = 0; i < 4; i++) {
-            (uint8 v, bytes32 r, bytes32 s) = vm.sign(
-                privateKeys[i],
-                messageHash
-            );
+            (uint8 v, bytes32 r, bytes32 s) = vm.sign(privateKeys[i], messageHash);
             bytes memory signature = abi.encodePacked(r, s, v);
             address signer = ECDSA.recover(messageHash, signature);
 

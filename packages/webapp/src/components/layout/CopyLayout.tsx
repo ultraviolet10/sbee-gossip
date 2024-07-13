@@ -22,11 +22,11 @@ const CopyLayout: React.FC<CopyProps> = () => {
                     </button>
                 </div>
 
-                <Image src={"/img/hand-holding-phone.svg"} alt={"phone"} width={450} height={450} />
+                <Image src={"/img/hand-holding-phone.svg"} alt={"phone"} width={450} height={450} priority />
             </div>
 
             <div className="flex flex-col-reverse space-y-4 w-full md:flex-row md:items-center justify-between">
-                <Image src={"/img/new-post.svg"} alt={"phone"} width={450} height={450} className="mt-4" />
+                <Image src={"/img/new-post.svg"} alt={"phone"} width={450} height={450} className="mt-4" priority />
                 <div className="flex flex-col items-start justify-center mt-4 space-y-6 md:w-[50%]">
                     <span className="text-black font-bold font-comic text-[25px]">LetSBeeHonest</span>
                     <span className="text-black font-semibold font-comic text-[18px] text-left">
@@ -46,7 +46,7 @@ const CopyLayout: React.FC<CopyProps> = () => {
                     </span>
                     <span className="text-black font-comic font-bold text-left text-[18px]">#SBEEtheChange</span>
                 </div>
-                <Image src={"/img/accept-or-not.svg"} alt={"phone"} width={450} height={450} />
+                <Image src={"/img/accept-or-not.svg"} alt={"phone"} width={450} height={450} priority />
             </div>
         </div>
     )

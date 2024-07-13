@@ -16,6 +16,7 @@ export default function Home() {
                 className="absolute md:left-0"
                 style={{ top: "-140px" }}
                 fill
+                priority
             />
 
             <div className="absolute z-10 flex flex-col min-h-full w-full items-center justify-start px-4 md:px-12">
