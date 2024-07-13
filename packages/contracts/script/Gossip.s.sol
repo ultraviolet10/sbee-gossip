@@ -35,6 +35,7 @@ contract GossipScript is Script {
 
         // Create a Semaphore group with the deployer as the admin
         uint256 currGroupId = semaphore.groupCounter();
+        console2.logUint(currGroupId);
         /*
             - add first 5 wallets as users to semaphore group
             - identity commitments should be pvt key + message signature hash

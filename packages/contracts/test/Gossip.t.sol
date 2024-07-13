@@ -21,17 +21,8 @@ contract GossipTest is Test {
     // events emitted
     event NewUser(uint256 identityCommitment, bytes32 username);
     event GroupCreated(uint256 indexed groupId);
-    event GroupAdminUpdated(
-        uint256 indexed groupId,
-        address indexed oldAdmin,
-        address indexed newAdmin
-    );
-    event MemberAdded(
-        uint256 indexed groupId,
-        uint256 index,
-        uint256 identityCommitment,
-        uint256 merkleTreeRoot
-    );
+    event GroupAdminUpdated(uint256 indexed groupId, address indexed oldAdmin, address indexed newAdmin);
+    event MemberAdded(uint256 indexed groupId, uint256 index, uint256 identityCommitment, uint256 merkleTreeRoot);
 
     function setUp() external {
         verifier = new SemaphoreVerifier();
@@ -55,13 +46,13 @@ contract GossipTest is Test {
         gossip.joinGroup(users[0]);
 
         // adding 2nd user updates the merkle tree root using poseidonT3
-        uint newRootHash = PoseidonT3.hash([users[0], users[1]]);
+        uint256 newRootHash = PoseidonT3.hash([users[0], users[1]]);
         vm.expectEmit(true, true, true, true);
         emit MemberAdded(0, 1, users[1], newRootHash);
         gossip.joinGroup(users[1]);
 
         // 3rd user
-        uint newerRootHash = PoseidonT3.hash([newRootHash, users[2]]);
+        uint256 newerRootHash = PoseidonT3.hash([newRootHash, users[2]]);
         vm.expectEmit(true, true, true, true);
         emit MemberAdded(0, 2, users[2], newerRootHash);
         gossip.joinGroup(users[2]);

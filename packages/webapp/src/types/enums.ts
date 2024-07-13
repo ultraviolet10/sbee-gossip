@@ -8,3 +8,8 @@ export enum Routes {
     Connect = "/connect",
     Feed = "/feed",
 }
+
+export enum AnonVote {
+    Believe = "Believe",
+    BS = "BS",
+}
