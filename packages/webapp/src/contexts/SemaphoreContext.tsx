@@ -100,11 +100,11 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
             // show success tx leading out to etherscan 
             // export to socials?
             if (choice === AnonVote.Believe) toast.success(`You voted in support!`)
-            else toast.info(`You voted against!`)
+            else toast.warning(`You voted against!`)
 
             return true
         } catch (error) {
-            toast.error("Something went wrong")
+            toast.error(`Something went wrong`)
             return false
         }
     }, [])
