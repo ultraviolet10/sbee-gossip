@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+
+import { sendTelegramMessage } from '@/utils/api-utils';
 
 const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TG_BOT_API_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.NEXT_PUBLIC_TG_CHAT_ID;
@@ -16,11 +17,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const response = await axios.post(
-      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+
+    const response = await sendTelegramMessage(
+      TELEGRAM_BOT_TOKEN as string,
+      TELEGRAM_CHAT_ID as string,
+      "New hot gossip! Click to reveal:",
       {
-        chat_id: TELEGRAM_CHAT_ID,
-        text: gossipContent,
+        inline_keyboard: [[
+          {
+            text: "Reveal Gossip",
+            callback_data: JSON.stringify({ action: 'reveal', content: gossipContent })
+          }
+        ]]
       }
     );
 
