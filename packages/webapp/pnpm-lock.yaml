@@ -29,6 +29,9 @@ importers:
       '@wagmi/cli':
         specifier: ^2.1.10
         version: 2.1.10(bufferutil@4.0.8)(typescript@5.4.5)(utf-8-validate@6.0.4)
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2277,6 +2280,9 @@ packages:
 
   axios@1.6.6:
     resolution: {integrity: sha512-XZLZDFfXKM9U/Y/B4nNynfCRUqNyVZ4sBC/n9GDRCkq9vd2mIvKjKKsbIh1WPmHmNbg6ND7cTBY3Y2+u1G3/2Q==}
+
+  axios@1.7.2:
+    resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
 
   axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
@@ -8787,6 +8793,14 @@ snapshots:
   axe-core@4.7.0: {}
 
   axios@1.6.6:
+    dependencies:
+      follow-redirects: 1.15.6
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+
+  axios@1.7.2:
     dependencies:
       follow-redirects: 1.15.6
       form-data: 4.0.0

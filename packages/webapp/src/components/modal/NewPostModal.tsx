@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from "react"
 
+import { toast } from "sonner"
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
 import { Textarea } from "@/components/ui/Textarea"
 import { useSemaphoreContext } from "@/contexts/SemaphoreContext"
@@ -33,8 +35,29 @@ const NewPostModal: React.FC<NewPostModalProps> = () => {
         // some user addition drama as well
         // user has typed something out
         if (gossipContent) {
-            await submitGossip(semaphoreIdentity!, gossipContent as string)
+            const gossipOnChain = await submitGossip(semaphoreIdentity!, gossipContent as string)
 
+            if (gossipOnChain) {
+                try {
+                    const response = await fetch('/api/newGossip', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ gossipContent }),
+                    });
+              
+                    const result = await response.json();
+                    console.log(result)
+                    if (response.ok) {
+                        toast.info("Gossip statement recorded successfully! Head on over to the telegram bot to read the spice! 🌶️🌶️🌶️")
+                    } else {
+                      toast.error("an error occured")
+                    }
+                  } catch (error) {
+                    toast.error("an error occured")
+                  }
+            }
             addGossip(gossipContent)
             setGossipContent(undefined)
 

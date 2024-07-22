@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.23;
 
 import {Script, console, console2} from "forge-std/Script.sol";
 import {Semaphore} from "@semaphore-protocol/contracts/Semaphore.sol";
 import {SemaphoreVerifier} from "@semaphore-protocol/contracts/base/SemaphoreVerifier.sol";
 import {ISemaphoreVerifier} from "@semaphore-protocol/contracts/interfaces/ISemaphoreVerifier.sol";
-import {Gossip2} from "../src/Gossip2.sol";
+import {Gossip} from "../src/Gossip.sol";
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract GossipScript is Script {
     SemaphoreVerifier public verifier;
     Semaphore public semaphore;
-    Gossip2 public gossip;
+    Gossip public gossip;
 
     bool private doLog = true;
 
@@ -31,7 +31,7 @@ contract GossipScript is Script {
         // deploy
         verifier = new SemaphoreVerifier();
         semaphore = new Semaphore(ISemaphoreVerifier(address(verifier)));
-        gossip = new Gossip2(address(semaphore));
+        gossip = new Gossip(address(semaphore));
 
         // Create a Semaphore group with the deployer as the admin
         uint256 currGroupId = semaphore.groupCounter();

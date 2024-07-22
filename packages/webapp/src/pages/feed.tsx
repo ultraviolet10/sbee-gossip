@@ -1,6 +1,5 @@
 import { NextPage } from "next"
 
-import FeedLayout from "@/components/feed/FeedLayout"
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
 
@@ -12,7 +11,7 @@ const FeedPage: NextPage = () => {
 
             <div className="flex flex-col w-full h-full items-center justify-center">
                 <span className="text-black font-comic text-[45px] md:text-[40px] font-bold mb-4">Truth Or Lie?</span>
-                <FeedLayout />
+                {/* <FeedLayout /> */}
             </div>
 
             <Footer />

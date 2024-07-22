@@ -1,7 +1,4 @@
-import React, { useCallback } from "react"
-
-import { useSemaphoreContext } from "@/contexts/SemaphoreContext"
-import { AnonVote } from "@/types/enums"
+import React from "react"
 
 interface FeedCardProps {
     statement: string
@@ -9,16 +6,7 @@ interface FeedCardProps {
 }
 
 const FeedCard: React.FC<FeedCardProps> = ({ statement }) => {
-    const { performVote } = useSemaphoreContext()
-    const handlePerformVote = useCallback(
-        async (choice: AnonVote) => {
-            const vote = await performVote(choice)
-            if (vote) {
-                return
-            }
-        },
-        [performVote]
-    )
+    
     return (
         <div className="flex flex-col z-10 items-start justify-between p-4 md:p-6 w-full md:h-[420px] rounded-xl bg-white border-[2px] border-gray-200 font-comic">
             <div className="flex flex-col items-start justify-center w-full px-4">
@@ -41,13 +29,11 @@ const FeedCard: React.FC<FeedCardProps> = ({ statement }) => {
                 <div className="flex flex-row w-full items-center justify-center space-x-4 mb-4">
                     <button
                         className="flex items-center justify-center w-[50%] h-[50px] bg-[#97c236] rounded-xl px-3 font-bold text-[15px] md:text-[20px]"
-                        onClick={() => handlePerformVote(AnonVote.Believe)}
                     >
                         I kinda believe it
                     </button>
                     <button
                         className="flex items-center justify-center w-[50%] h-[50px] bg-[#c24836] rounded-xl px-3 font-bold text-[15px] md:text-[20px]"
-                        onClick={() => handlePerformVote(AnonVote.BS)}
                     >
                         This is BS
                     </button>
