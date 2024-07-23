@@ -16,7 +16,6 @@ import { toast } from "sonner"
 
 import { gossipAbi } from "@/generated"
 import useStore from "@/store/store"
-import { AnonVote } from "@/types/enums"
 
 export type SemaphoreContextType = {
     users: string[]
@@ -24,15 +23,11 @@ export type SemaphoreContextType = {
     refreshUsers: () => Promise<void>
     addUser: (user: string) => void
     refreshGossip: () => Promise<void>
-    addGossip: (gossip: string) => void
     addUserToGroup: (commitment: bigint) => Promise<boolean>
     submitGossip: (identity: Identity, gossipContent: string) => Promise<boolean>
-    performVote: (choice: AnonVote) => Promise<boolean>
-    // @todo vote functions
 }
 
 const SemaphoreContext = createContext<SemaphoreContextType | null>(null)
-// @todo extend SemaphoreContext -> GossipContext?
 interface ProviderProps {
     children: ReactNode
 }
@@ -49,9 +44,8 @@ const signer = new Wallet(ethereumPrivateKey, provider)
 const gossipAddress = process.env.NEXT_PUBLIC_GOSSIP_CONTRACT_ADDRESS as string
 
 export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) => {
-    const { users, gossips, addGossip, addUser, setUsers, setGossip } = useStore()
+    const { users, gossips, addUser, setUsers, setGossip } = useStore()
 
-    // .•°:°.´+˚.*°.˚:*.´•*.+°.•°: MEMOIZED CONTRACT INSTANCES ´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•
     // Semaphore contract instance
     const semaphoreContract = useMemo(() => {
         return new SemaphoreEthers(ethereumNetwork, {
@@ -93,21 +87,6 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
     // const getGossipIds = useCallback(async () => {
     //     const gossipSentEvents = await getEvents(semaphoreContract.contract, "FeedbackSent", groupId)
     // }, [])
-
-    const performVote = useCallback(async (choice: AnonVote) => {
-        try {
-            // perform vote, once tx confirms, show toast(s)
-            // show success tx leading out to etherscan 
-            // export to socials?
-            if (choice === AnonVote.Believe) toast.success(`You voted in support!`)
-            else toast.warning(`You voted against!`)
-
-            return true
-        } catch (error) {
-            toast.error(`Something went wrong`)
-            return false
-        }
-    }, [])
 
     /**
      * Submits a tx to the `joinGroup` method on the `Gossip`
@@ -182,8 +161,9 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
                 if (submitTxConf.status === 1) {
                     // local updates
                     console.log({ submitTxConf })
-                    addGossip(gossipContent)
+                    
                     refreshGossip()
+                    // trigger bot message send 
 
                     return true
                 }
@@ -193,7 +173,7 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
                 return false
             }
         },
-        [addGossip, gossipContract, groupId, refreshGossip, users]
+        [gossipContract, groupId, refreshGossip, users]
     )
 
     useEffect(() => {
@@ -209,10 +189,8 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
                 refreshUsers,
                 addUser,
                 refreshGossip,
-                addGossip,
                 addUserToGroup,
                 submitGossip,
-                performVote,
             }}
         >
             {children}

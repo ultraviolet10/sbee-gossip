@@ -39,7 +39,7 @@ const NewPostModal: React.FC<NewPostModalProps> = () => {
 
             if (gossipOnChain) {
                 try {
-                    const response = await fetch('/api/newGossip', {
+                    const response = await fetch('/api/telegram/newGossip', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
