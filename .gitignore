@@ -17,7 +17,6 @@ yarn-error.log*
 packages/contracts/cache/
 packages/contracts/out/
 packages/contracts/broadcast/
-packages/webapp/src/generated.ts
 
 # IntelliJ config
 .idea/
