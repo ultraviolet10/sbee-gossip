@@ -9,7 +9,7 @@ export default function Home() {
         <main
             className={`relative flex min-h-screen flex-col items-start md:items-center justify-between bg-sbee overflow-auto`}
         >
-            {/* landing page banner images */}
+            {/* landing page banner image */}
             <Image
                 src={"/img/landing-banner.svg"}
                 alt={"landing"}
