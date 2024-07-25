@@ -2,10 +2,9 @@ import React, { useCallback, useEffect } from "react"
 import { NextPage } from "next"
 import Image from "next/image"
 import { useRouter } from "next/router"
+import { useAccount, useConnect, useSignMessage } from "wagmi"
 
 import { Identity } from "@semaphore-protocol/core/identity"
-
-import { useConfigWallet } from "../hooks/useConfigWallet"
 
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
@@ -14,28 +13,28 @@ import { Routes } from "@/types/enums"
 
 const ConnectPage: NextPage = () => {
     const router = useRouter()
-    const { connectWallet, signMessage } = useConfigWallet()
     const { setSemaphoreIdentity, walletAddress } = useStore()
+    const { connectors, connect } = useConnect()
+    const { address } = useAccount()
+    const { signMessage, data } = useSignMessage()
 
     const handleConnectClick = useCallback(async () => {
-        // connect wallet
-        const connection = await connectWallet()
+        connectors.map((connector) => connect({ connector }))
 
-        // sign message
-        let msgSignature: string | undefined = undefined
-        if (connection) {
-            msgSignature = await signMessage("truths galore")
+        if (address) {
+            const message = "truths galore"
+            signMessage({ message })
         } else {
             // handle error
             console.log("sign issue")
         }
 
-        if (msgSignature) {
-            const identity = new Identity(msgSignature)
+        if (data) {
+            const identity = new Identity(data)
             setSemaphoreIdentity(identity)
             router.push(Routes.Feed)
         }
-    }, [connectWallet, router, setSemaphoreIdentity, signMessage])
+    }, [address, connect, connectors, data, router, setSemaphoreIdentity, signMessage])
 
     useEffect(() => {
         // if user is already connected, send them over to the gossip feed page

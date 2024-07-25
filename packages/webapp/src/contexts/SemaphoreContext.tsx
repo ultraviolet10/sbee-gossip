@@ -2,10 +2,10 @@
 import React, { createContext, ReactNode, useCallback, useContext, useEffect, useMemo } from "react"
 import {
     Contract,
-    decodeBytes32String,
+    // decodeBytes32String,
     encodeBytes32String,
     JsonRpcProvider,
-    toBeHex,
+    // toBeHex,
     TransactionReceipt,
     Wallet,
 } from "ethers"
@@ -14,7 +14,8 @@ import { generateProof, Group, Identity } from "@semaphore-protocol/core"
 import { SemaphoreEthers } from "@semaphore-protocol/data"
 import { toast } from "sonner"
 
-import { gossipAbi } from "@/generated"
+import { gossipAbi } from "../generated"
+
 import useStore from "@/store/store"
 
 export type SemaphoreContextType = {
@@ -22,7 +23,7 @@ export type SemaphoreContextType = {
     gossips: string[]
     refreshUsers: () => Promise<void>
     addUser: (user: string) => void
-    refreshGossip: () => Promise<void>
+    // refreshGossip: () => Promise<void>
     addUserToGroup: (commitment: bigint) => Promise<boolean>
     submitGossip: (identity: Identity, gossipContent: string) => Promise<boolean>
 }
@@ -32,23 +33,23 @@ interface ProviderProps {
     children: ReactNode
 }
 
-const ethereumNetwork =
-    process.env.NEXT_PUBLIC_DEFAULT_NETWORK === "localhost"
-        ? "http://127.0.0.1:8545"
-        : process.env.NEXT_PUBLIC_DEFAULT_NETWORK
+// const ethereumNetwork =
+//     process.env.NEXT_PUBLIC_DEFAULT_NETWORK === "localhost"
+//         ? "http://127.0.0.1:8545"
+//         : process.env.NEXT_PUBLIC_DEFAULT_NETWORK
 
 const ethereumPrivateKey = process.env.NEXT_PUBLIC_TEST_PVT_KEY as string
 
-const provider = new JsonRpcProvider("http://127.0.0.1:8545")
+const provider = new JsonRpcProvider("https://eth-sepolia.g.alchemy.com/v2/demo")
 const signer = new Wallet(ethereumPrivateKey, provider)
 const gossipAddress = process.env.NEXT_PUBLIC_GOSSIP_CONTRACT_ADDRESS as string
 
 export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) => {
-    const { users, gossips, addUser, setUsers, setGossip } = useStore()
+    const { users, gossips, addUser, setUsers } = useStore()
 
     // Semaphore contract instance
     const semaphoreContract = useMemo(() => {
-        return new SemaphoreEthers(ethereumNetwork, {
+        return new SemaphoreEthers("sepolia", {
             address: process.env.NEXT_PUBLIC_SEMAPHORE_CONTRACT_ADDRESS,
         })
     }, [])
@@ -62,14 +63,15 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
     const groupId = process.env.NEXT_PUBLIC_GROUP_ID as string
 
     const refreshUsers = useCallback(async (): Promise<void> => {
-        const members = await semaphoreContract.getGroupMembers(groupId)
-        setUsers(members.map((member) => member.toString()))
+        // const members = await semaphoreContract.getGroupMembers(groupId)
+        setUsers([])
     }, [groupId, semaphoreContract, setUsers])
 
-    const refreshGossip = useCallback(async (): Promise<void> => {
-        const proofs = await semaphoreContract.getGroupValidatedProofs(groupId)
-        setGossip(proofs.map(({ message }: any) => decodeBytes32String(toBeHex(message, 32))))
-    }, [groupId, semaphoreContract, setGossip])
+    // const refreshGossip = useCallback(async (): Promise<void> => {
+    //     // const proofs = await semaphoreContract.getGroupValidatedProofs(groupId)
+    //     // setGossip(proofs.map(({ message }: any) => decodeBytes32String(toBeHex(message, 32))))
+    //     setGossip([])
+    // }, [groupId, semaphoreContract, setGossip])
 
     /**
      * in order to vote, we need to send the `feedbackId` in as a parameter
@@ -162,7 +164,7 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
                     // local updates
                     console.log({ submitTxConf })
                     
-                    refreshGossip()
+                    // refreshGossip()
                     // trigger bot message send 
 
                     return true
@@ -173,13 +175,13 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
                 return false
             }
         },
-        [gossipContract, groupId, refreshGossip, users]
+        [gossipContract, groupId, users]
     )
 
     useEffect(() => {
         refreshUsers()
-        refreshGossip()
-    }, [refreshGossip, refreshUsers])
+        // refreshGossip()
+    }, [refreshUsers])
 
     return (
         <SemaphoreContext.Provider
@@ -188,7 +190,7 @@ export const SemaphoreContextProvider: React.FC<ProviderProps> = ({ children }) 
                 gossips,
                 refreshUsers,
                 addUser,
-                refreshGossip,
+                // refreshGossip,
                 addUserToGroup,
                 submitGossip,
             }}

@@ -29,6 +29,9 @@ importers:
       '@wagmi/cli':
         specifier: ^2.1.10
         version: 2.1.10(bufferutil@4.0.8)(typescript@5.4.5)(utf-8-validate@6.0.4)
+      '@wagmi/core':
+        specifier: ^2.13.0
+        version: 2.13.0(@tanstack/query-core@5.45.0)(@types/react@18.3.3)(react@18.3.1)(typescript@5.4.5)(viem@2.14.2(bufferutil@4.0.8)(typescript@5.4.5)(utf-8-validate@6.0.4)(zod@3.23.8))
       axios:
         specifier: ^1.7.2
         version: 1.7.2
@@ -66,7 +69,7 @@ importers:
         specifier: ^0.9.1
         version: 0.9.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       viem:
-        specifier: 2.x
+        specifier: ~2.14.2
         version: 2.14.2(bufferutil@4.0.8)(typescript@5.4.5)(utf-8-validate@6.0.4)(zod@3.23.8)
       wagmi:
         specifier: ^2.10.2
@@ -1973,6 +1976,18 @@ packages:
 
   '@wagmi/core@2.11.2':
     resolution: {integrity: sha512-M4Yu6SBQoSTlodC+D1iEijuZTyAMYy+XLIIdaDRQ/oVwsOmAMe+YZzbAeCO51UGduekam6QkX2WGeNFEHFtYOA==}
+    peerDependencies:
+      '@tanstack/query-core': '>=5.0.0'
+      typescript: '>=5.0.4'
+      viem: 2.x
+    peerDependenciesMeta:
+      '@tanstack/query-core':
+        optional: true
+      typescript:
+        optional: true
+
+  '@wagmi/core@2.13.0':
+    resolution: {integrity: sha512-44HrRbwFzPF/EZMvIzdkdIYmJM93GjG1NWxAc+eCTRMn6LwZSVkw8XSJIkHN7xqf0CzikfQW1t16miJ0T+wRpw==}
     peerDependencies:
       '@tanstack/query-core': '>=5.0.0'
       typescript: '>=5.0.4'
@@ -4087,6 +4102,14 @@ packages:
 
   mipd@0.0.5:
     resolution: {integrity: sha512-gbKA784D2WKb5H/GtqEv+Ofd1S9Zj+Z/PGDIl1u1QAbswkxD28BQ5bSXQxkeBzPBABg1iDSbiwGG1XqlOxRspA==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  mipd@0.0.7:
+    resolution: {integrity: sha512-aAPZPNDQ3uMTdKbuO2YmAw2TxLHO0moa4YKAyETM/DTj5FloZo+a+8tU+iv4GmW+sOxKLSRwcSFuczk+Cpt6fg==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -8252,6 +8275,20 @@ snapshots:
       - utf-8-validate
       - zod
 
+  '@wagmi/core@2.13.0(@tanstack/query-core@5.45.0)(@types/react@18.3.3)(react@18.3.1)(typescript@5.4.5)(viem@2.14.2(bufferutil@4.0.8)(typescript@5.4.5)(utf-8-validate@6.0.4)(zod@3.23.8))':
+    dependencies:
+      eventemitter3: 5.0.1
+      mipd: 0.0.7(typescript@5.4.5)
+      viem: 2.14.2(bufferutil@4.0.8)(typescript@5.4.5)(utf-8-validate@6.0.4)(zod@3.23.8)
+      zustand: 4.4.1(@types/react@18.3.3)(react@18.3.1)
+    optionalDependencies:
+      '@tanstack/query-core': 5.45.0
+      typescript: 5.4.5
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - react
+
   '@walletconnect/core@2.13.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)':
     dependencies:
       '@walletconnect/heartbeat': 1.2.2
@@ -10995,6 +11032,10 @@ snapshots:
       - bufferutil
       - utf-8-validate
       - zod
+
+  mipd@0.0.7(typescript@5.4.5):
+    optionalDependencies:
+      typescript: 5.4.5
 
   mkdirp@0.5.6:
     dependencies:
